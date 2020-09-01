@@ -1,2 +1,16 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<p>Welcome to {{title}}, a basic Express website</p>
+
+<ul>
+  <li><strong>Books:</strong>{{data.book_count}}</li>
+  <li><strong>Copies:</strong>{{data.book_instance_count}}</li>
+  <li><strong>Copies available:</strong>{{data.book_instance_available_count}}</li>
+  <li><strong>Authors:</strong>{{data.author_count}}</li>
+  <li><strong>Genres:</strong>{{data.genre_count}}</li>
+</ul>
+
+{{#if error}}
+  <p>Error: {{error}}</p>
+{{else}}
+  <p>Hurray, no errors!</p>
+{{/if}}
