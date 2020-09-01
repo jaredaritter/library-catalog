@@ -1,4 +1,7 @@
+// SECURE DATABASE CONNECTION INITIALIZATION
 require('dotenv').config(); // ENV VAR HANDLER
+
+// Require outside libraries
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -6,11 +9,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 
-// Require routes
+// Require routers
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog');
 
+// Initialize express app
 var app = express();
 
 // Set up default mongoDB connection using environment variables

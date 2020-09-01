@@ -2,7 +2,7 @@ const Author = require('../models/author');
 
 // DISPLAY LIST OF ALL AUTHORS
 exports.author_list = (req, res) => {
-  res.send('NOT IMPLEMENTED: ');
+  res.send('NOT IMPLEMENTED: Author list');
 };
 
 // DISPLAY DETAILS PAGE FOR SPECIFIC AUTHOR
