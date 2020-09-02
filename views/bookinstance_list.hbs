@@ -1,0 +1,11 @@
+<h1>{{title}}</h1>
+<ul>
+  {{#each bookinstance_list}}
+    <li>
+      <a href={{url}}>{{book.title}} : {{imprint}}</a>
+        <span> - </span> 
+        <span class="text-success">{{status}}</span>
+        <span>(Due: {{due_back}}</span>
+    </li>
+  {{/each}}
+</ul>
