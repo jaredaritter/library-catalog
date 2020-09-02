@@ -1,5 +1,4 @@
 const Author = require('../models/author');
-const { nextTick } = require('async');
 
 // DISPLAY LIST OF ALL AUTHORS
 exports.author_list = (req, res) => {
