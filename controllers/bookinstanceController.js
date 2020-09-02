@@ -12,7 +12,6 @@ exports.bookinstance_list = function (req, res, next) {
         title: 'Book Instance List',
         bookinstance_list: list_bookinstances,
       });
-      list_bookinstances.forEach((entry) => console.log(entry.book.title));
     });
 };
 
