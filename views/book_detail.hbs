@@ -1,0 +1,20 @@
+<h1>Title: {{book.title}}</h1>
+<p><strong>Author:</strong> <a href={{book.author.url}}>{{book.author.name}}</a>
+</p>
+<p><strong>Summary:</strong> {{book.summary}}</p>
+<p><strong>ISBN:</strong> {{book.isbn}}</p>
+<p><strong>Genre:</strong>&nbsp;
+  {{#each book.genre}}
+    <a href={{url}}>{{name}}</a>,
+  {{/each}}
+</p>
+<div style="margin-left:20px; margin-top:20px">
+  <h4>Copies</h4>
+  {{#each book_instance}}
+    <hr>
+    <p class="text-success">{{status}}</p>
+    <p><strong>Imprint:</strong>{{imprint}}</p>
+    <p><strong>Due back:</strong>{{due_back_formatted}}</p>
+    <p><strong>Id:</strong>&nbsp;<a href={{url}}>{{id}}</a></p>
+  {{/each}}
+</div>
