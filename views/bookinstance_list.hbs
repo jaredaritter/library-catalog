@@ -3,9 +3,15 @@
   {{#each bookinstance_list}}
     <li>
       <a href={{url}}>{{book.title}} : {{imprint}}</a>
-        <span> - </span> 
-        <span class="text-success">{{status}}</span>
-        <span>(Due: {{due_back_formatted}}</span>
+        <span> - </span>
+        {{#if available}} 
+          <span class="text-success">{{status}}</span>
+        {{else}}
+          <span class="text-warning">{{status}}</span>
+        {{/if}}
+        {{#unless available}}
+          <span>(Due: {{due_back_formatted}})</span>
+        {{/unless}}
     </li>
   {{/each}}
   {{#unless bookinstance_list}}
