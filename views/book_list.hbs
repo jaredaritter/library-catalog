@@ -5,4 +5,7 @@
       <a href={{url}}>{{title}}</a> ({{author.name}})
     </li>
   {{/each}}
+  {{#unless book_list}}
+    <li>There aren't any books :(</li>
+  {{/unless}}
 </ul>
