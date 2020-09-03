@@ -1,4 +1,4 @@
-// SECURE DATABASE CONNECTION INITIALIZATION
+// ENVIRONMENT VARIABLE INITIALIZATION
 require('dotenv').config(); // ENV VAR HANDLER
 
 // Require outside libraries
