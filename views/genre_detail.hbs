@@ -6,5 +6,8 @@
       <dt><a href={{url}}>{{title}}</a></dt>
       <dd>{{summary}}</dd>
     {{/each}}
+    {{#unless genre_books}}
+      <p>This genre has no books</p>
+    {{/unless}}
   </dl>
 </div>

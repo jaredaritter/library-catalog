@@ -17,4 +17,7 @@
     <p><strong>Due back:</strong>{{due_back_formatted}}</p>
     <p><strong>Id:</strong>&nbsp;<a href={{url}}>{{id}}</a></p>
   {{/each}}
+  {{#unless book_instance}}
+    <p>There are no copies of this book in the library</p>
+  {{/unless}}
 </div>
