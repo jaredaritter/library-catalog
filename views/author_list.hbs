@@ -5,4 +5,7 @@
       <a href={{url}}>{{name}}</a> {{date_of_birth_formatted}} - {{date_of_death_formatted}}
     </li>
   {{/each}}
+  {{#unless author_list}}
+    <li>There are no authors</li>
+  {{/unless}}
 </ul>

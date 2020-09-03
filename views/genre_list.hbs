@@ -5,4 +5,7 @@
       <a href={{url}}>{{name}}</a>
     </li>
   {{/each}}
+  {{#unless genre_list}}
+    <li>There are no genres</li>
+  {{/unless}}
 </ul>
