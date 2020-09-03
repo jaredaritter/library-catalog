@@ -8,4 +8,7 @@
         <span>(Due: {{due_back_formatted}}</span>
     </li>
   {{/each}}
+  {{#unless bookinstance_list}}
+    <li>There are no book copies in this library</li>
+  {{/unless}}
 </ul>
