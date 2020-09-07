@@ -62,7 +62,6 @@ exports.genre_create_post = [
     .escape(),
   (req, res, next) => {
     const errors = validator.validationResult(req);
-    console.log(errors);
     const genre = new Genre({ name: req.body.name });
     if (!errors.isEmpty()) {
       res.render('genre_form', {
