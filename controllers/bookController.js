@@ -133,7 +133,6 @@ exports.book_create_post = [
   // Process request
   (req, res, next) => {
     const errors = validationResult(req);
-    // console.log(errors);
     // Create book object
     const book = new Book({
       title: req.body.title,
@@ -147,20 +146,15 @@ exports.book_create_post = [
         {
           authors: function (callback) {
             Author.find(callback);
-            console.log('authors success');
           },
           genres: function (callback) {
             Genre.find(callback);
-            console.log('genres success');
           },
         },
         function (err, results) {
-          console.log('function success');
           if (err) {
-            console.log('err success');
             return next(err);
           }
-          console.log(results.genres.length);
           for (let i = 0; i < results.genres.length; i++) {
             if (book.genre.indexOf(results.genres[i]._id) > -1) {
               results.genres[i].checked = 'true';
