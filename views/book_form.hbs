@@ -1,0 +1,49 @@
+<h1>{{title}}</h1>
+<form action="" method="POST">
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input type="text" id="title" class="form-control" placeholder="Name of book" name="title" value="{{book.title}}">
+  </div>
+  <div class="form-group">
+    <label for="author">Author:</label>
+    <select name="author" id="author" class="form-control">
+      <option value="">--Select Author--</option>
+      {{#each authors}}
+        {{#if book}}
+          <option value="{{_id}}" selected>{{name}}</option>
+        {{else}}
+          <option value="{{_id}}">{{name}}</option>
+        {{/if}}
+      {{/each}}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="summary">Summary:</label>
+    <textarea name="summary" id="summary" cols="30" rows="1" class="form-control">
+      {{book.summary}}
+    </textarea>
+  </div>
+  <div class="form-group">
+    <label for="isbn">ISBN:</label>
+    <input type="text" id="isbn" class="form-control" placeholder="ISBN13" name="isbn" value="{{book.isbn}}">
+  </div>
+  <div class="form-group">
+    <label for="genre">Genre:</label>
+    <div>
+      {{#each genres}}
+        <div style="display:inline; padding-right:10px;">
+          <input type="checkbox" class="checkbox-input" name="genre" id="{{_id}}" value="{{_id}}" checked="{{checked}}">
+          <label for="genre">{{name}}</label>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+{{#if errors}}
+  <ul>
+    {{#each errors}}
+      <li>{{msg}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
