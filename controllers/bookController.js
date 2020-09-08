@@ -152,6 +152,7 @@ exports.book_create_post = [
           },
         },
         function (err, results) {
+          console.log(req.body);
           if (err) {
             return next(err);
           }
@@ -164,6 +165,7 @@ exports.book_create_post = [
             title: 'Create Book',
             authors: results.authors,
             genres: results.genres,
+            book: req.body,
             errors: errors.array(),
           });
         }

@@ -2,11 +2,11 @@
 <form action="" method="POST">
   <div class="form-group">
     <label for="title">Title:</label>
-    <input type="text" id="title" class="form-control" placeholder="Name of book" name="title" value="{{book.title}}">
+    <input type="text" id="title" class="form-control" placeholder="Name of book" name="title" value="{{book.title}}" required>
   </div>
   <div class="form-group">
     <label for="author">Author:</label>
-    <select name="author" id="author" class="form-control">
+    <select name="author" id="author" class="form-control" required>
       <option value="">--Select Author--</option>
       {{#each authors}}
         {{#if book}}
@@ -19,13 +19,13 @@
   </div>
   <div class="form-group">
     <label for="summary">Summary:</label>
-    <textarea name="summary" id="summary" cols="30" rows="1" class="form-control">
+    <textarea name="summary" id="summary" cols="30" rows="1" class="form-control" required>
       {{book.summary}}
     </textarea>
   </div>
   <div class="form-group">
     <label for="isbn">ISBN:</label>
-    <input type="text" id="isbn" class="form-control" placeholder="ISBN13" name="isbn" value="{{book.isbn}}">
+    <input type="text" id="isbn" class="form-control" placeholder="ISBN13" name="isbn" value="{{book.isbn}}" required>
   </div>
   <div class="form-group">
     <label for="genre">Genre:</label>
