@@ -1,5 +1,5 @@
 const Author = require('../models/author');
-const book = require('../models/book');
+const Book = require('../models/book');
 const async = require('async');
 const { body, validationResult } = require('express-validator');
 
@@ -27,7 +27,7 @@ exports.author_detail = (req, res, next) => {
         Author.findById(req.params.id).exec(callback);
       },
       author_books: function (callback) {
-        book.find({ author: req.params.id }, 'title summary').exec(callback);
+        Book.find({ author: req.params.id }, 'title summary').exec(callback);
       },
     },
     function (err, results) {
@@ -107,13 +107,64 @@ exports.author_create_post = [
 ];
 
 // DISPLAY AUTHOR DELETE FORM ON GET
-exports.author_delete_get = (req, res) => {
-  res.send('NOT IMPLEMENTED: Author delete GET');
+exports.author_delete_get = (req, res, next) => {
+  async.parallel(
+    {
+      author: function (callback) {
+        Author.findById(req.params.id).exec(callback);
+      },
+      authors_books: function (callback) {
+        Book.find({ author: req.params.id }).exec(callback);
+      },
+    },
+    function (err, results) {
+      if (err) {
+        return next(err);
+      }
+      if (results.author == null) {
+        res.redirect('/catalog/authors');
+      }
+      res.render('author_delete', {
+        title: 'Delete Author',
+        author: results.author,
+        author_books: results.authors_books,
+      });
+    }
+  );
 };
 
 // HANDLE AUTHOR DELETE ON POST
-exports.author_delete_post = (req, res) => {
-  res.send('NOT IMPLEMENTED: Author delet POST');
+exports.author_delete_post = (req, res, next) => {
+  async.parallel(
+    {
+      author: function (callback) {
+        Author.findById(req.body.authorid).exec(callback);
+      },
+      authors_books: function (callback) {
+        Book.find({ author: req.body.authorid }).exec(callback);
+      },
+    },
+    function (err, results) {
+      if (err) {
+        return next(err);
+      }
+      if (results.authors_books.length > 0) {
+        res.render('author_delete', {
+          title: 'Delete Author',
+          author: results.author,
+          author_books: results.authors_books,
+        });
+        return;
+      } else {
+        Author.findByIdAndDelete(req.body.authorid, function deleteAuthor(err) {
+          if (err) {
+            return next(err);
+          }
+          res.redirect('/catalog/authors');
+        });
+      }
+    }
+  );
 };
 
 // DISPLAY AUTHOR UPDATE FORM ON GET
