@@ -82,7 +82,7 @@ exports.bookinstance_create_post = [
           return next(err);
         }
         res.render('bookinstance_form', {
-          title: 'Create BookInstance',
+          title: 'Create Book Instance',
           book_list: books,
           errors: errors.array(),
           bookinstance: bookinstance,
@@ -114,7 +114,7 @@ exports.bookinstance_delete_get = function (req, res, next) {
         res.redirect('/catalog/bookinstances');
       }
       res.render('bookinstance_delete', {
-        title: 'Delete BookInstance',
+        title: 'Delete Book Instance',
         bookinstance,
       });
     });
