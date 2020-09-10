@@ -2,7 +2,6 @@ var Genre = require('../models/genre');
 const Book = require('../models/book');
 const async = require('async');
 const validator = require('express-validator');
-const author = require('../models/author');
 
 // Display list of all Genre.
 exports.genre_list = function (req, res) {
@@ -141,7 +140,7 @@ exports.genre_delete_post = function (req, res, next) {
         });
         return;
       } else {
-        author.findByIdAndDelete(req.body.genreid, function deleteGenre(err) {
+        Genre.findByIdAndDelete(req.body.genreid, function deleteGenre(err) {
           if (err) {
             return next(err);
           }
