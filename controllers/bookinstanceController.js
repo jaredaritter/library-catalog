@@ -91,7 +91,6 @@ exports.bookinstance_create_post = [
           errors: errors.array(),
           bookinstance: returnedBookInstance,
         });
-        console.log(returnedBookInstance);
       });
       return;
     }
