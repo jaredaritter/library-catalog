@@ -1,9 +1,8 @@
 const Author = require('../models/author');
 const Book = require('../models/book');
 const async = require('async');
+const moment = require('moment');
 const { body, validationResult } = require('express-validator');
-const book = require('../models/book');
-const e = require('express');
 
 // DISPLAY LIST OF ALL AUTHORS
 exports.author_list = (req, res) => {
@@ -85,11 +84,22 @@ exports.author_create_post = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      const returnedAuthor = {
+        first_name: req.body.first_name,
+        family_name: req.body.family_name,
+        date_of_birth_formatted: req.body.date_of_birth
+          ? moment(req.body.date_of_birth).format('YYYY-MM-DD')
+          : '',
+        date_of_death_formatted: req.body.date_of_death
+          ? moment(req.body.date_of_death).format('YYYY-MM-DD')
+          : '',
+      };
       res.render('author_form', {
         title: 'Create Author',
-        author: req.body,
+        author: returnedAuthor,
         errors: errors.array(),
       });
+      console.log(returnedAuthor);
       return;
     } else {
       const author = new Author({
