@@ -99,7 +99,6 @@ exports.author_create_post = [
         author: returnedAuthor,
         errors: errors.array(),
       });
-      console.log(returnedAuthor);
       return;
     } else {
       const author = new Author({
