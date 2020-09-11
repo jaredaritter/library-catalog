@@ -2,6 +2,7 @@ var BookInstance = require('../models/bookinstance');
 var Book = require('../models/book');
 const { body, validationResult } = require('express-validator');
 const async = require('async');
+const moment = require('moment');
 
 // Display list of all BookInstances.
 exports.bookinstance_list = function (req, res, next) {
@@ -70,14 +71,16 @@ exports.bookinstance_create_post = [
   // Process request
   (req, res, next) => {
     const errors = validationResult(req);
-    const bookinstance = new BookInstance({
-      book: req.body.book,
-      imprint: req.body.imprint,
-      status: req.body.status,
-      due_back: req.body.due_back,
-    });
     // Error
     if (!errors.isEmpty()) {
+      const returnedBookInstance = {
+        book: req.body.book,
+        imprint: req.body.imprint,
+        status: req.body.status,
+        due_back_form_version: req.body.due_back
+          ? moment(req.body.due_back).format('YYYY-MM-DD')
+          : '',
+      };
       Book.find({}, 'title').exec(function (err, books) {
         if (err) {
           return next(err);
@@ -86,13 +89,20 @@ exports.bookinstance_create_post = [
           title: 'Create Book Instance',
           book_list: books,
           errors: errors.array(),
-          bookinstance: bookinstance,
+          bookinstance: returnedBookInstance,
         });
+        console.log(returnedBookInstance);
       });
       return;
     }
     // Valid
     else {
+      const bookinstance = new BookInstance({
+        book: req.body.book,
+        imprint: req.body.imprint,
+        status: req.body.status,
+        due_back: req.body.due_back,
+      });
       bookinstance.save(function (err) {
         if (err) {
           return next(err);
