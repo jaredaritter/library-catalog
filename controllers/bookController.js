@@ -266,6 +266,7 @@ exports.book_update_get = function (req, res, next) {
         err.status = 404;
         return next(err);
       }
+      // Add selected logic and value to author to allow for selection?
       // Check logic for checks, currently filling them all in.
       for (let i = 0; i < results.genres.length; i++) {
         for (let j = 0; j < results.book.genre.length; j++) {
@@ -274,15 +275,19 @@ exports.book_update_get = function (req, res, next) {
             results.book.genre[j]._id.toString()
           ) {
             results.genres[i].checked = 'true';
+            // Logic here working correctly
           }
         }
       }
+      // Need to look at implementation of showing checked items
+      console.log(results.genres);
       res.render('book_form', {
         title: 'Update Book',
         authors: results.authors,
         genres: results.genres,
         book: results.book,
       });
+      // console.log(results.book);
     }
   );
 };

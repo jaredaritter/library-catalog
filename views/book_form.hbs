@@ -9,11 +9,7 @@
     <select name="author" id="author" class="form-control" required>
       <option value="">--Select Author--</option>
       {{#each authors}}
-        {{#if book}}
-          <option value="{{_id}}" selected>{{name}}</option>
-        {{else}}
-          <option value="{{_id}}">{{name}}</option>
-        {{/if}}
+        <option value="{{_id}}">{{name}}</option>
       {{/each}}
     </select>
   </div>
