@@ -10,3 +10,4 @@
   - Fixed with using virtual formatted version of the dates. Browser able to parse them. Need to go through and correct any that are incorrect.
 - Dates show as one day behind the input date. Likely due to timezone issue that may take more research to resolve (possibly resolved with utc method in moment?)
 - Use regex form validation to allow browser to stop non-alphanumeric entries. Currently server is validating this.
+- Add required attributes to forms allowing html validation
