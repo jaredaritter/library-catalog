@@ -225,21 +225,31 @@ exports.author_update_post = [
   // Process request
   (req, res, next) => {
     const errors = validationResult(req);
-    const author = new Author({
-      first_name: req.body.first_name,
-      family_name: req.body.family_name,
-      date_of_birth: req.body.date_of_birth,
-      date_of_death: req.body.date_of_death,
-      _id: req.params.id,
-    });
     if (!errors.isEmpty()) {
+      const returnedAuthor = {
+        first_name: req.body.first_name,
+        family_name: req.body.family_name,
+        date_of_birth_formatted: req.body.date_of_birth
+          ? moment(req.body.date_of_birth).format('YYYY-MM-DD')
+          : '',
+        date_of_death_formatted: req.body.date_of_death
+          ? moment(req.body.date_of_death).format('YYYY-MM-DD')
+          : '',
+      };
       res.render('author_form', {
         title: 'Update Author',
-        author: author,
+        author: returnedAuthor,
         errors: errors.array(),
       });
       return;
     } else {
+      const author = new Author({
+        first_name: req.body.first_name,
+        family_name: req.body.family_name,
+        date_of_birth: req.body.date_of_birth,
+        date_of_death: req.body.date_of_death,
+        _id: req.params.id,
+      });
       Author.findByIdAndUpdate(req.params.id, author, {}, function (
         err,
         theauthor
