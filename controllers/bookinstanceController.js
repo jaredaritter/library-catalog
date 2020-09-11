@@ -190,16 +190,18 @@ exports.bookinstance_update_post = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
+  // Process request
   (req, res, next) => {
     const errors = validationResult(req);
-    const bookinstance = new BookInstance({
-      book: req.body.book,
-      imprint: req.body.imprint,
-      due_back: req.body.due_back,
-      status: req.body.status,
-      _id: req.params.id, // Required or a new ID will be assigned!
-    });
     if (!errors.isEmpty()) {
+      const returnedBookInstance = {
+        book: req.body.book,
+        imprint: req.body.imprint,
+        status: req.body.status,
+        due_back_form_version: req.body.due_back
+          ? moment(req.body.due_back).format('YYYY-MM-DD')
+          : '',
+      };
       Book.find({}, 'title').exec(function (err, book_list) {
         if (err) {
           return next(err);
@@ -207,12 +209,19 @@ exports.bookinstance_update_post = [
         res.render('bookinstance_form', {
           title: 'Update Book Instance',
           book_list: book_list,
-          bookinstance: bookinstance,
+          bookinstance: returnedBookInstance,
           errors: errors.array(),
         });
         return;
       });
     } else {
+      const bookinstance = new BookInstance({
+        book: req.body.book,
+        imprint: req.body.imprint,
+        due_back: req.body.due_back,
+        status: req.body.status,
+        _id: req.params.id, // Required or a new ID will be assigned!
+      });
       BookInstance.findByIdAndUpdate(req.params.id, bookinstance, {}, function (
         err,
         thebookinstance
