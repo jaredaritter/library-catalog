@@ -19,8 +19,9 @@ var catalogRouter = require('./routes/catalog');
 // Initialize express app
 var app = express();
 
-// Set up default mongoDB connection using environment variables
-const mongoDB = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.d6pof.mongodb.net/${process.env.DB_HOST}?retryWrites=true&w=majority`;
+// Set up default mongoDB connection using environment variables (development and production versions)
+const dev_db_url = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.d6pof.mongodb.net/${process.env.DB_HOST}?retryWrites=true&w=majority`;
+const mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Get the default connection
