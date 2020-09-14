@@ -24,6 +24,9 @@ const dev_db_url = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PA
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
+// Prod DB info
+// mongodb+srv://<user>:<password>@cluster0.y74js.mongodb.net/<dbname>?retryWrites=true&w=majority
+
 // Get the default connection
 const db = mongoose.connection;
 
