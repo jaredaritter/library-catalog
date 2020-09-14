@@ -7,7 +7,7 @@
 <form action="" method="POST">
   <div class="form-group">
     <label for="book">Book:</label>
-    <select name="book" id="book" class="form-control">
+    <select name="book" id="book" class="form-control" required>
       <option value="">--Please select book--</option>
       {{!-- Leaving out displaying selected book when returning body information from failed POST --}}
       {{#each book_list}}
@@ -17,15 +17,15 @@
   </div>
   <div class="form-group">
     <label for="imprint">Imprint:</label>
-    <input type="text" id="imprint" class="form-control" placeholder="Publisher and date information" name="imprint" value="{{bookinstance.imprint}}" >
+    <input type="text" id="imprint" class="form-control" placeholder="Publisher and date information" name="imprint" value="{{bookinstance.imprint}}" required>
   </div>
   <div class="form-group">
     <label for="due_back">Date when book available:</label>
-    <input type="date" id="due_back" class="form-control" name="due_back" value="{{bookinstance.due_back_form_version}}">
+    <input type="date" id="due_back" class="form-control" name="due_back" value="{{bookinstance.due_back_form_version}}" required>
   </div>
   <div class="form-group">
     <label for="status">Status:</label>
-    <select name="status" id="status" class="form-control">
+    <select name="status" id="status" class="form-control" required>
       <option value="">--Please select status--</option>
       <option value="Maintenance">Maintenance</option>
       <option value="Available">Available</option>
